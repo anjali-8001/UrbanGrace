@@ -1,0 +1,110 @@
+.bannerContainer {
+  background-image: url(../Images/Banner.jpg);
+  height: calc(100vh - 120px);
+  width: 100%;
+  background-size: cover;
+  position: relative;
+}
+.banner {
+  position: absolute;
+  left: 100px;
+  top: 200px;
+  width: 500px;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.bannerTextHeading {
+  font-size: 4rem;
+  font-weight: bold;
+}
+.bannerText {
+  font-size: 1.5rem;
+}
+.bannerButton {
+  background-color: white;
+  width: 150px;
+  height: 50px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.homeTaglineContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  padding: 100px 100px;
+  text-align: center;
+}
+.tagline {
+  width: 800px;
+}
+.homeItems1 {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 0px 50px 100px 50px;
+}
+.homeItem1 img {
+  width: 100%;
+  height: 100%;
+}
+.homeItems2 {
+  display: flex;
+  flex: row;
+  gap: 20px;
+  padding: 0px 100px;
+  height: 80vh;
+}
+.homeItem2Img {
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+.homeItem2TextContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+}
+.homeItem2TextHeading {
+  font-size: 3rem;
+}
+.homeItem2Text {
+  font-size: 1.5rem;
+  font-style: italic;
+}
+.discountTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #1a2f27;
+  color: white;
+  padding: 80px 300px;
+  gap: 30px;
+}
+.discountTextHeading {
+  font-size: 3rem;
+  font-weight: bolder;
+}
+.discountText {
+  font-size: 1.5rem;
+  color: rgb(209, 209, 209);
+}
+.discountEmail {
+  font-size: 1.5rem;
+  color: rgb(209, 209, 209);
+}

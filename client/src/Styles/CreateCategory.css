@@ -1,0 +1,80 @@
+.categoryContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  h2 {
+    align-self: center;
+  }
+}
+.createCategoryContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgb(243, 239, 239);
+  padding: 20px;
+}
+.createCategoryForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  input {
+    width: 50%;
+    height: 40px;
+    padding: 5px;
+    font-size: 15px;
+  }
+  button {
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+  }
+}
+.manageCategoryContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: rgb(243, 239, 239);
+}
+.allCategoriesTable {
+  width: 590px;
+  text-align: left;
+  padding: 10px;
+  th,
+  td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    width: 50%;
+  }
+}
+
+.categoryEditButton{
+  width: 80px;
+  height: 30px;
+  background-color: #004080;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+.categoryDeleteButton{
+  width: 80px;
+  height: 30px;
+  background-color: #D11A2A;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+.editCategory{
+  height: 30px;
+  width: 200px;
+  font-size: 1rem;
+  padding: 2px;
+}
+.categoryUpdateButton{
+  height: 30px;
+  width: 80px;
+  background-color: #004080;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}

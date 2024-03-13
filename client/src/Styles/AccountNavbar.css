@@ -1,0 +1,27 @@
+.accountContainer {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  margin: 100px 100px;
+  gap: 50px;
+}
+.accountNavbarContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.accountNavLinksContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1.2rem;
+  color: rgb(209, 209, 209);
+}
+.accountNavLink {
+  padding: 20px;
+  text-decoration: none;
+  color: black;
+}
+.navLinkActive {
+  background-color: #1a2f27;
+  color: white;
+}

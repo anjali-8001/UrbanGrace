@@ -1,0 +1,16 @@
+.settingsContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(245, 243, 243);
+    padding: 50px 10px;
+}
+.settingsSectionContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 50px;
+}
+.settingsSection{
+    background-color: white;
+    padding: 10px;
+}

@@ -1,0 +1,43 @@
+.loginContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 80px 200px;
+    gap: 50px;
+}
+.loginHeading{
+    font-size: 3rem;
+    font-weight: bolder;
+}
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 450px;
+    input{
+        height: 50px;
+        padding: 10px;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+    button{
+        width: 130px;
+        height: 50px;
+        align-self: center;
+        font-size: 1.2rem;
+        background-color: #1A2F27;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+}
+.loginCreateAccount{
+    align-self: center;
+    font-size: 1.2rem;
+}
+.loginButton:hover{
+    transform: scale(1.05);
+}

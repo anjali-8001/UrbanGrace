@@ -1,0 +1,32 @@
+.contactTextContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(209, 209, 209);
+    color: black;
+    padding: 80px 300px;
+    gap: 30px;
+  }
+  .contactTextHeading {
+    font-size: 3rem;
+    font-weight: bolder;
+  }
+  .contactText {
+    font-size: 1.5rem;
+  }
+  .contactUserEmail {
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    font-size: 1.2rem;
+  }
+  .contactUserEmailButton {
+    height: 40px;
+    font-size: 1.2rem;
+    width: 150px;
+    background-color: #1a2f27;
+    color: rgb(209, 209, 209);
+  }
+  

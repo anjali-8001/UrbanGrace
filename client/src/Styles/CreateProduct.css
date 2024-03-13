@@ -1,0 +1,59 @@
+.productContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  h2 {
+    align-self: center;
+  }
+}
+
+.createProductContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgb(243, 239, 239);
+  padding: 20px;
+}
+.createProductForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  button {
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+  }
+}
+
+.formInput {
+  width: 50%;
+  height: 40px;
+  padding: 5px;
+  font-size: 15px;
+}
+
+.formItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+    label{
+        width: 120px;
+    }
+    button{
+        width: 150px;
+        height: 40px;
+    }
+}
+
+.formSelect  {
+    width: 50%;
+}
+
+.isFeatured{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
