@@ -63,10 +63,6 @@ function Navbar() {
     getCategories();
   }, []);
 
-  useEffect(() => {
-    console.log(values?.keyword);
-  }, [values]);
-
   return (
     <div className="navbar">
       <div className="navLogoContainer">
@@ -77,64 +73,60 @@ function Navbar() {
       </div>
 
       <div className="navLinksContainer">
-        <ul>
-          {categories?.map((category) => {
-            return (
-              <li key={category._id}>
-                <Link to={`/category/${category._id}`} className="navLink">
-                  {category.name}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        {categories?.map((category) => {
+          return (
+            <div key={category._id}>
+              <Link to={`/category/${category._id}`} className="navLink">
+                {category.name}
+              </Link>
+            </div>
+          );
+        })}
       </div>
       <div className="navSignContainer">
-        <ul>
-          <li>
-            <form className="searchForm" onSubmit={handleSubmit}>
-              <button type="submit">
-                <IoIosSearch className="searchicon" size={27} color="black" />
-              </button>
-              <input
-                type="input"
-                placeholder="Search"
-                value={values.keyword}
-                onChange={(e) =>
-                  setValues({ ...values, keyword: e.target.value })
-                }
-              />
-            </form>
-          </li>
-
-          <li>
-            <Link>
-              <FaRegHeart className="likeIcon" size={25} color="black" />
-            </Link>
-          </li>
-          <li>
-            <Link to="/cart">
-              <MdOutlineShoppingCart
-                className="carticon"
-                size={26}
-                color="black"
-              />
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={
-                auth.user
-                  ? auth.user.isAdmin
-                    ? "/account/admin"
-                    : "/account/user"
-                  : "/login"
+        <div>
+          <form className="searchForm" onSubmit={handleSubmit}>
+            <button type="submit">
+              <IoIosSearch className="searchicon" size={27} color="black" />
+            </button>
+            <input
+              type="input"
+              placeholder="Search"
+              value={values.keyword}
+              onChange={(e) =>
+                setValues({ ...values, keyword: e.target.value })
               }
-            >
-              <FaRegUser className="usericon" size={23} color="black" />
-            </Link>
-          </li>
-        </ul>
+            />
+          </form>
+        </div>
+
+        <div>
+          <Link>
+            <FaRegHeart className="likeIcon" size={25} color="black" />
+          </Link>
+        </div>
+        <div>
+          <Link to="/cart">
+            <MdOutlineShoppingCart
+              className="carticon"
+              size={26}
+              color="black"
+            />
+          </Link>
+        </div>
+        <div>
+          <Link
+            to={
+              auth.user
+                ? auth.user.isAdmin
+                  ? "/account/admin"
+                  : "/account/user"
+                : "/login"
+            }
+          >
+            <FaRegUser className="usericon" size={23} color="black" />
+          </Link>
+        </div>
       </div>
     </div>
   );
