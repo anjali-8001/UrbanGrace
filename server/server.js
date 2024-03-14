@@ -7,7 +7,14 @@ const connectDB = require("./config/db");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://urban-grace.vercel.app/",
+    methods: ["POST", "GET"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 app.use(bodyParser.json());
 
 connectDB();
