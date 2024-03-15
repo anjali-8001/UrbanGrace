@@ -46,7 +46,7 @@ function Home() {
             Walking groups, community groups or employee gifting - get in
             contact with us to get your discount on all bulk purchases.
           </div>
-          <div className="discountEmail">Email us at support@clothstore.in</div>
+          <div className="discountEmail">Email us at contact@urbangrace.in</div>
         </div>
         <div className="homeItems2">
           <div className="homeItem2TextContainer">

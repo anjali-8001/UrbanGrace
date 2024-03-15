@@ -5,12 +5,15 @@ import axios from "axios";
 import Layout from "../Components/Layout";
 import toast from "react-hot-toast";
 import { useAuth } from "../Contexts/auth";
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [type, setType] = useState("password");
 
   const [auth, setAuth] = useAuth();
 
@@ -53,14 +56,25 @@ function Login() {
               onChange={(e) => setEmail(e.target.value)}
               name="email"
               placeholder="Email"
-            ></input>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              name="password"
-              placeholder="Password"
-            ></input>
+            />
+            <div className="loginPassword">
+              <input
+                type={type}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                placeholder="Password"
+              />
+              {type === "password" ? (
+                <p onClick={() => setType("input")}>
+                  <FaRegEyeSlash />
+                </p>
+              ) : (
+                <p onClick={() => setType("password")}>
+                  <FaRegEye />
+                </p>
+              )}
+            </div>
             <Link to="" className="loginForgotPassword">
               Forgot your password?
             </Link>

@@ -1,44 +1,65 @@
-.registerContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 80px 200px;
-    gap: 50px;
+.registerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 80px 200px;
+  gap: 50px;
 }
-.registerHeading{
-    font-size: 3rem;
-    font-weight: bolder;
+.registerHeading {
+  font-size: 3rem;
+  font-weight: bolder;
 }
-.registerForm{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 450px;
-    input{
-        height: 50px;
-        padding: 10px;
-        font-size: 1.1rem;
-    }
-}
-.registerButton{
-    width: 200px;
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 450px;
+  input {
+    border: 1px solid grey;
     height: 50px;
-    align-self: center;
-    font-size: 1.2rem;
-    background-color: #1A2F27;
-    color: white;
+    padding: 10px;
+    font-size: 1.1rem;
+  }
+}
+
+.registerPassword {
+  width: 450px;
+  border: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 1.1rem;
+  input {
+    width: 410px;
     border: none;
-    border-radius: 5px;
-    align-self: center;
-    font-size: 1.2rem;
-    margin-top: 20px;
+  }
+  p {
+    width: 40px;
+    text-align: center;
+  }
 }
-.registerButton:hover{
-    transform: scale(1.05);
+.registerButton {
+  width: 200px;
+  height: 50px;
+  align-self: center;
+  font-size: 1.2rem;
+  background-color: #1a2f27;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  align-self: center;
+  font-size: 1.2rem;
+  margin-top: 20px;
 }
-.loginRedirect{
-    text-decoration: none;
-    align-self: center;
-    color: black;
+.registerButton:hover {
+  transform: scale(1.05);
+}
+.loginRedirect {
+  text-decoration: none;
+  align-self: center;
+  color: black;
+}
+input:focus {
+  outline: none;
 }

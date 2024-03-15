@@ -9,31 +9,13 @@ import { FaRegHeart } from "react-icons/fa6";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useSearch } from "../Contexts/search";
+import { useCategory } from "../Contexts/category";
 
 function Navbar() {
-  const [auth, setAuth] = useAuth();
-  const [categories, setCategories] = useState();
+  const [auth] = useAuth();
+  const [categories] = useCategory();
   const [values, setValues] = useSearch();
   const navigate = useNavigate();
-
-  const getCategories = async () => {
-    try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_API}/category/get-categories`,
-        {
-          headers: {
-            Authorization: auth?.token,
-          },
-        }
-      );
-      if (res?.data.success) {
-        setCategories(res.data.categories);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong in getting categories");
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,10 +40,6 @@ function Navbar() {
       toast.error("Something went wrong");
     }
   };
-
-  useEffect(() => {
-    getCategories();
-  }, []);
 
   return (
     <div className="navbar">
@@ -105,13 +83,14 @@ function Navbar() {
             <FaRegHeart className="likeIcon" size={25} color="black" />
           </Link>
         </div>
-        <div>
-          <Link to="/cart">
+        <div className="cartIcon">
+          <Link to="/cart" className="link">
             <MdOutlineShoppingCart
               className="carticon"
               size={26}
               color="black"
             />
+            <span className="cartTotalItems">5</span>
           </Link>
         </div>
         <div>

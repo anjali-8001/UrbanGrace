@@ -71,3 +71,18 @@
   display: flex;
   text-decoration: none;
 }
+.cartIcon {
+  position: relative;
+}
+.cartTotalItems {
+  position: absolute;
+  top: 0px;
+  left: 20px;
+  background-color: #1a2f27;
+  border-radius: 50%;
+  color: white;
+  width: 18px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: bolder;
+}
