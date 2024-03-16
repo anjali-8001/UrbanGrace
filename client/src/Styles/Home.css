@@ -1,6 +1,6 @@
 .bannerContainer {
   background-image: url(../Images/Banner.jpg);
-  height: calc(100vh - 120px);
+  height: calc(100vh - 80px);
   width: 100%;
   background-size: cover;
   position: relative;

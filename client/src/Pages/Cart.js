@@ -45,7 +45,7 @@ function Cart() {
     }
   };
 
-  const handleDeleteItem = async (productId) => {
+  const handleDeleteItem = async (productId, size) => {
     if (auth?.user) {
       try {
         const res = await axios.post(
@@ -53,6 +53,7 @@ function Cart() {
           {
             user: auth?.user,
             productId: productId,
+            size: size,
           },
           {
             headers: {
@@ -116,7 +117,9 @@ function Cart() {
                         </td>
                         <td className="cartDelete">
                           <button
-                            onClick={() => handleDeleteItem(product.productId)}
+                            onClick={() =>
+                              handleDeleteItem(product.productId, product.size)
+                            }
                             className="cartDeleteItem"
                           >
                             <VscClose color="grey" className="cartDeleteIcon" />

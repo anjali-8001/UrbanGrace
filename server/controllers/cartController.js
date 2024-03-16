@@ -124,7 +124,7 @@ const deleteProductController = async (req, res) => {
     let cart = await cartModel.findOne({ userId: user._id });
 
     const productIndex = cart.products.findIndex((item) => {
-      return item.productId.equals(prodId) && item.size.equals(size);
+      return item.productId.equals(prodId) && item.size === size;
     });
 
     if (productIndex > -1) {
