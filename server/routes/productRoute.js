@@ -5,6 +5,7 @@ const {
   getProductController,
   searchProductController,
   getProductsBySubCategoryController,
+  getFeaturedProductsController,
 } = require("../controllers/productController");
 const {
   requireSignIn,
@@ -20,10 +21,13 @@ router.post(
 );
 
 router.post("/get-products/:categoryId", getProductsByCategoryController);
+
 router.get(
   "/get-productsByType/:subcatName",
   getProductsBySubCategoryController
 );
+
+router.get("/get-featuredProducts", getFeaturedProductsController);
 
 router.get("/get-product/:productId", getProductController);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../Styles/Navbar.css";
 import { FaRegUser } from "react-icons/fa6";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -24,12 +24,7 @@ function Navbar() {
     }
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_API}/product/search/${values.keyword}`,
-        {
-          headers: {
-            Authorization: auth?.token,
-          },
-        }
+        `${process.env.REACT_APP_API}/product/search/${values.keyword}`
       );
       if (res?.data.success) {
         setValues({ ...values, result: res.data.products });
@@ -85,11 +80,7 @@ function Navbar() {
         </div>
         <div className="cartIcon">
           <Link to="/cart" className="link">
-            <MdOutlineShoppingCart
-              className="carticon"
-              size={26}
-              color="black"
-            />
+            <MdOutlineShoppingCart className="carticon" size={26} />
             <span className="cartTotalItems">5</span>
           </Link>
         </div>

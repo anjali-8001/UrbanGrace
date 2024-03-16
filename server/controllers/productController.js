@@ -128,6 +128,33 @@ const createProductController = async (req, res) => {
   }
 };
 
+const getFeaturedProductsController = async (req, res) => {
+  try {
+    const pipeline = [
+      {
+        $match: {
+          isFeatured: true,
+        },
+      },
+    ];
+
+    const products = await productModel.aggregate(pipeline);
+
+    res.status(200).send({
+      success: true,
+      products,
+      message: "Products fetched successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "error in getFeaturedProductsController Controller",
+    });
+  }
+};
+
 const getProductsByCategoryController = async (req, res) => {
   try {
     const { categoryId } = req.params;
@@ -140,11 +167,6 @@ const getProductsByCategoryController = async (req, res) => {
       {
         $match: {
           category: new mongoose.Types.ObjectId(categoryId),
-        },
-      },
-      {
-        $match: {
-          isFeatured: true,
         },
       },
       {
@@ -281,4 +303,5 @@ module.exports = {
   getProductController,
   searchProductController,
   getProductsBySubCategoryController,
+  getFeaturedProductsController,
 };

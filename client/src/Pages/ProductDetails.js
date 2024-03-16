@@ -7,43 +7,44 @@ import toast from "react-hot-toast";
 import "../Styles/ProductDetails.css";
 import { AiTwotoneHeart } from "react-icons/ai";
 import { TbTruckDelivery } from "react-icons/tb";
-import { useLoading } from "../Contexts/loading";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { FcLike } from "react-icons/fc";
+import { useProduct } from "../Contexts/product";
 
 function ProductDetails() {
   const { productId } = useParams();
   const [auth] = useAuth();
-  const [product, setProduct] = useState();
   const [quantity, setQuantity] = useState(0);
-  const [loading, setLoading] = useLoading();
   const [isLiked, setIsLiked] = useState(false);
   const [size, setSize] = useState("");
   const navigate = useNavigate();
+
+  const { getSingleProduct, singleProduct } = useProduct();
+
   // const [uid, setUid] = useState();
   // const [cart, setCart] = useState(() => {
   //   const storedCart = localStorage.getItem("cart");
   //   return storedCart ? JSON.parse(storedCart) : { products: [], bill: 0 };
   // });
 
-  const getProductDetails = async () => {
-    try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_API}/product/get-product/${productId}`,
-        {
-          headers: {
-            Authorization: auth?.token,
-          },
-        }
-      );
-      if (res?.data.success) {
-        setProduct(res.data.product);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong in getting subcategories");
-    }
-  };
+  // const getProductDetails = async () => {
+  //   try {
+  //     const res = await axios.get(
+  //       `${process.env.REACT_APP_API}/product/get-product/${productId}`,
+  //       {
+  //         headers: {
+  //           Authorization: auth?.token,
+  //         },
+  //       }
+  //     );
+  //     if (res?.data.success) {
+  //       setProduct(res.data.product);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("Something went wrong in getting subcategories");
+  //   }
+  // };
 
   const handleAddProduct = async () => {
     if (auth?.user) {
@@ -124,7 +125,7 @@ function ProductDetails() {
   // };
 
   useEffect(() => {
-    getProductDetails();
+    getSingleProduct(productId);
   }, []);
 
   // useEffect(() => {
@@ -133,15 +134,15 @@ function ProductDetails() {
 
   return (
     <Layout>
-      {product ? (
+      {singleProduct ? (
         <div className="productDetailsPage">
           <div className="productImageContainer">
-            <img src={product.image.url} alt="productImg" />
+            <img src={singleProduct.image?.url} alt="productImg" />
           </div>
 
           <form className="productDetailsContainer" action="">
             <div className="productName">
-              <p>{product.name}</p>
+              <p>{singleProduct.name}</p>
               {isLiked ? (
                 <FcLike size={30} onClick={() => setIsLiked((prev) => !prev)} />
               ) : (
@@ -153,7 +154,7 @@ function ProductDetails() {
             </div>
             <div className="productPrice">
               <p>MRP inclusive of all taxes</p>
-              <p className="productPriceValue">₹ {product.price}</p>
+              <p className="productPriceValue">₹ {singleProduct.price}</p>
             </div>
             <hr />
             <div className="productSize">
@@ -256,7 +257,7 @@ function ProductDetails() {
             <hr />
             <div className="productDescription">
               <p> Product Description</p>
-              {product.description}
+              {singleProduct.description}
             </div>
           </form>
         </div>

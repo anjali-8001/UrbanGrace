@@ -7,19 +7,22 @@ import { AuthProvider } from "./Contexts/auth";
 import { LoadingProvider } from "./Contexts/loading";
 import { SearchProvider } from "./Contexts/search";
 import { CategoryProvider } from "./Contexts/category";
+import { ProductProvider } from "./Contexts/product";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <LoadingProvider>
-        <CategoryProvider>
-          <SearchProvider>
-            <App />
-          </SearchProvider>
-        </CategoryProvider>
-      </LoadingProvider>
-    </AuthProvider>
+    <ProductProvider>
+      <AuthProvider>
+        <LoadingProvider>
+          <CategoryProvider>
+            <SearchProvider>
+              <App />
+            </SearchProvider>
+          </CategoryProvider>
+        </LoadingProvider>
+      </AuthProvider>
+    </ProductProvider>
   </React.StrictMode>
 );
 

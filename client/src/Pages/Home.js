@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../Styles/Home.css";
-import img2 from "../Images/img2.avif";
-import img3 from "../Images/img3.avif";
-import img4 from "../Images/img4.avif";
-import img5 from "../Images/img5.avif";
-import img1 from "../Images/img1.avif";
 import Layout from "../Components/Layout";
+import { useProduct } from "../Contexts/product";
+import Product from "../Components/Product";
+import { Link } from "react-router-dom";
 
 function Home() {
+  const { featuredProducts } = useProduct();
+
   return (
     <div className="home">
       <Layout>
@@ -17,7 +17,14 @@ function Home() {
               "Elevate Your Everyday Elegance"
             </div>
             <div className="bannerText">The Newest Collection is here!</div>
-            <div className="bannerButton">Shop Now</div>
+            <div className="bannerButtons">
+              <Link className="link" to="category/65b7bda383502abf27691113">
+                <div className="bannerButton">Shop Women</div>
+              </Link>
+              <Link className="link" to="category/65b87fd6716c79545c9431af">
+                <div className="bannerButton">Shop Men</div>
+              </Link>
+            </div>
           </div>
         </div>
         <div className="homeTaglineContainer">
@@ -27,18 +34,20 @@ function Home() {
           </div>
         </div>
         <div className="homeItems1">
-          <div className="homeItem1">
-            <img src={img2} alt="" />
-          </div>
-          <div className="homeItem1">
-            <img src={img3} alt="" />
-          </div>
-          <div className="homeItem1">
-            <img src={img4} alt="" />
-          </div>
-          <div className="homeItem1">
-            <img src={img5} alt="" />
-          </div>
+          {featuredProducts.slice(0, 4).map((product) => (
+            <Link
+              key={product._id}
+              className="link"
+              to={`/product/${product._id}`}
+            >
+              <Product
+                key={product.id}
+                name={product.name}
+                price={product.price}
+                image={product.image.url}
+              />
+            </Link>
+          ))}
         </div>
         <div className="discountTextContainer">
           <div className="discountTextHeading">Looking For a Group Deal?</div>
@@ -59,7 +68,21 @@ function Home() {
             <div className="homeItem2Subtext">Richard</div>
           </div>
           <div className="homeItem2Img">
-            <img src={img1} alt="" />
+            {featuredProducts
+              .filter((product) => product._id === "65d2232ea246793046910a01")
+              .map((product) => (
+                <Link
+                  key={product._id}
+                  className="link"
+                  to={`/product/${product._id}`}
+                >
+                  <img
+                    key={product.id}
+                    src={product.image.url}
+                    alt="Product Img"
+                  />
+                </Link>
+              ))}
           </div>
         </div>
       </Layout>
