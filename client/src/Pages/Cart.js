@@ -2,85 +2,27 @@ import React, { useEffect, useState } from "react";
 import Layout from "../Components/Layout";
 import "../Styles/Cart.css";
 import { useAuth } from "../Contexts/auth";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { VscClose } from "react-icons/vsc";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-
 import { Link } from "react-router-dom";
+import { useCart } from "../Contexts/cart";
 
 function Cart() {
-  const [auth] = useAuth();
-  const [cart, setCart] = useState(() => {
-    const storedCart = localStorage.getItem("cart");
-    return storedCart ? JSON.parse(storedCart) : [];
-  });
+  const { cart, totalPrice, totalItems } = useCart();
   const navigate = useNavigate();
-
-  const getCart = async () => {
-    if (auth?.user) {
-      try {
-        const res = await axios.post(
-          `${process.env.REACT_APP_API}/cart/get-cart`,
-          {
-            user: auth?.user,
-          },
-          {
-            headers: {
-              Authorization: auth?.token,
-            },
-          }
-        );
-        if (res?.data.success) {
-          setCart(res.data.cart);
-        }
-      } catch (error) {
-        console.log(error);
-        toast.error("Something went wrong in getting products");
-      }
-    } else {
-      // localStorage.getItem(cart);
-      // setCart(cart);
-    }
-  };
+  const { deleteProductFromCart } = useCart();
 
   const handleDeleteItem = async (productId, size) => {
-    if (auth?.user) {
-      try {
-        const res = await axios.post(
-          `${process.env.REACT_APP_API}/cart/delete-product`,
-          {
-            user: auth?.user,
-            productId: productId,
-            size: size,
-          },
-          {
-            headers: {
-              Authorization: auth?.token,
-            },
-          }
-        );
-        if (res?.data.success) {
-          setCart(res.data.cart);
-        }
-      } catch (error) {
-        console.log(error);
-        toast.error("Something went wrong in getting products");
-      }
-    }
+    deleteProductFromCart(productId, size);
   };
-
-  useEffect(() => {
-    getCart();
-  }, []);
 
   return (
     <Layout>
       <div className="cart">
         <div className="cartContainer">
           <h1 className="cartHeading">Shopping Cart</h1>
-          {cart.products && cart.products.length > 0 ? (
+          {cart && totalItems > 0 ? (
             <>
               <table>
                 <tr>
@@ -90,7 +32,7 @@ function Cart() {
                   <th>Price</th>
                 </tr>
                 {cart &&
-                  cart.products.map((product) => {
+                  cart.map((product) => {
                     return (
                       <tr key={product._id}>
                         <Link
@@ -132,7 +74,7 @@ function Cart() {
               <div className="cartTotalContainer">
                 <p>
                   <b>SubTotal: </b>
-                  <span>₹{cart?.bill}</span>
+                  <span>₹{totalPrice}</span>
                 </p>
                 <p>
                   <b>Shipping: </b>
@@ -141,7 +83,7 @@ function Cart() {
                 <hr />
                 <p>
                   <b>Total: </b>
-                  <span className="totalamt">₹{cart?.bill}</span>
+                  <span className="totalamt">₹{totalPrice}</span>
                 </p>
               </div>
               <button className="continueShopping" onClick={() => navigate(-1)}>

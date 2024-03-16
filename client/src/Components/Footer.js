@@ -4,12 +4,16 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FiPhone } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { CiMail } from "react-icons/ci";
+import logo from "../Images/logo.jpeg";
 
 export default function Footer() {
   return (
     <div className="footer">
       <div className="footerbrandContainer">
-        <div className="brandTitle">Urbangrace</div>
+        <div className="brandTitle">
+          <img src={logo} alt="" />
+          <p>Urbangrace</p>
+        </div>
         <div className="brandDescription">
           Urbangrace is a dynamic clothing brand, embodying innovation and
           growth. Rooted in our core values of sustainable styling, we offer

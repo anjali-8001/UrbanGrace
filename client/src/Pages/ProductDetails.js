@@ -10,6 +10,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { FcLike } from "react-icons/fc";
 import { useProduct } from "../Contexts/product";
+import { useCart } from "../Contexts/cart";
 
 function ProductDetails() {
   const { productId } = useParams();
@@ -20,6 +21,7 @@ function ProductDetails() {
   const navigate = useNavigate();
 
   const { getSingleProduct, singleProduct } = useProduct();
+  const { addProductToCart } = useCart();
 
   // const [uid, setUid] = useState();
   // const [cart, setCart] = useState(() => {
@@ -47,81 +49,8 @@ function ProductDetails() {
   // };
 
   const handleAddProduct = async () => {
-    if (auth?.user) {
-      try {
-        const res = await axios
-          .post(
-            `${process.env.REACT_APP_API}/cart/add-product`,
-            {
-              user: auth?.user,
-              productId: productId,
-              quantity: quantity,
-              size: size,
-            },
-            {
-              headers: {
-                Authorization: auth?.token,
-              },
-            }
-          )
-          .catch(async (error) => {
-            toast.error(error.response.data.message);
-          });
-        if (res?.data.success) {
-          toast.success(res.data.message);
-        }
-      } catch (error) {
-        console.log(error);
-        toast.error("Something went wrong in adding product to cart");
-      }
-    } else {
-      navigate("/login");
-      //  // create uid
-      //   const storedUid = localStorage.getItem("uid");
-      //   if (storedUid) {
-      //     setUid(storedUid);
-      //   } else {
-      //     const newUid = generateUid();
-      //     localStorage.setItem("uid", newUid);
-      //     setUid(newUid);
-      //   }
-      //   if (!size) {
-      //     toast.error("Size is required!");
-      //     return;
-      //   }
-      //   if (quantity === 0) {
-      //     toast.error("Quantity is required!");
-      //     return;
-      //   }
-      //   //add product to cart
-      //   const newCartItem = {
-      //     productId: product._id,
-      //     name: product.name,
-      //     quantity: quantity,
-      //     image: product.image,
-      //     size: size,
-      //     price: product.price,
-      //   };
-
-      //   const newProducts = [...cart.products, newCartItem];
-      //   const newBill = cart.bill + newCartItem.quantity * newCartItem.price;
-      //   setCart({
-      //     products: newProducts,
-      //     bill: newBill,
-      //   });
-      //   toast.success("Product added to cart.");
-    }
+    await addProductToCart(productId, quantity, size);
   };
-
-  // const generateUid = () => {
-  //   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-  //     /[xy]/g,
-  //     function (c) {
-  //       var r = (Math.random() * 16) | 0,
-  //         v = c == "x" ? r : (r & 0x3) | 0x8;
-  //       return v.toString(16);
-  //     }
-  //   );
   // };
 
   useEffect(() => {
@@ -269,3 +198,47 @@ function ProductDetails() {
 }
 
 export default ProductDetails;
+//  // create uid
+//   const storedUid = localStorage.getItem("uid");
+//   if (storedUid) {
+//     setUid(storedUid);
+//   } else {
+//     const newUid = generateUid();
+//     localStorage.setItem("uid", newUid);
+//     setUid(newUid);
+//   }
+//   if (!size) {
+//     toast.error("Size is required!");
+//     return;
+//   }
+//   if (quantity === 0) {
+//     toast.error("Quantity is required!");
+//     return;
+//   }
+//   //add product to cart
+//   const newCartItem = {
+//     productId: product._id,
+//     name: product.name,
+//     quantity: quantity,
+//     image: product.image,
+//     size: size,
+//     price: product.price,
+//   };
+
+//   const newProducts = [...cart.products, newCartItem];
+//   const newBill = cart.bill + newCartItem.quantity * newCartItem.price;
+//   setCart({
+//     products: newProducts,
+//     bill: newBill,
+//   });
+//   toast.success("Product added to cart.");
+
+// const generateUid = () => {
+//   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+//     /[xy]/g,
+//     function (c) {
+//       var r = (Math.random() * 16) | 0,
+//         v = c == "x" ? r : (r & 0x3) | 0x8;
+//       return v.toString(16);
+//     }
+//   );

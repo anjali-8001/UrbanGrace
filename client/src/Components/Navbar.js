@@ -10,12 +10,15 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useSearch } from "../Contexts/search";
 import { useCategory } from "../Contexts/category";
+import logo from "../Images/logo.jpeg";
+import { useCart } from "../Contexts/cart";
 
 function Navbar() {
   const [auth] = useAuth();
   const [categories] = useCategory();
   const [values, setValues] = useSearch();
   const navigate = useNavigate();
+  const { totalItems } = useCart();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,8 +43,7 @@ function Navbar() {
     <div className="navbar">
       <div className="navLogoContainer">
         <Link to="/" className="navLink">
-          <div className="navLogo">URBANGRACE</div>
-          <div className="navLogoText">Sustainably Styled, Socially Loved</div>
+          <img src={logo} alt="" />
         </Link>
       </div>
 
@@ -81,7 +83,7 @@ function Navbar() {
         <div className="cartIcon">
           <Link to="/cart" className="link">
             <MdOutlineShoppingCart className="carticon" size={26} />
-            <span className="cartTotalItems">5</span>
+            <span className="cartTotalItems">{totalItems}</span>
           </Link>
         </div>
         <div>

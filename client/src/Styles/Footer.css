@@ -19,6 +19,13 @@
 }
 .brandTitle {
   font-size: 1.5rem;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  img {
+    width: 30px;
+    height: 30px;
+  }
 }
 .footerLinksContainer,
 .footerContactContainer {

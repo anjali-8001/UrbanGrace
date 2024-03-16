@@ -8,21 +8,24 @@ import { LoadingProvider } from "./Contexts/loading";
 import { SearchProvider } from "./Contexts/search";
 import { CategoryProvider } from "./Contexts/category";
 import { ProductProvider } from "./Contexts/product";
+import { CartProvider } from "./Contexts/cart";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ProductProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <ProductProvider>
         <LoadingProvider>
           <CategoryProvider>
             <SearchProvider>
-              <App />
+              <CartProvider>
+                <App />
+              </CartProvider>
             </SearchProvider>
           </CategoryProvider>
         </LoadingProvider>
-      </AuthProvider>
-    </ProductProvider>
+      </ProductProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
 
