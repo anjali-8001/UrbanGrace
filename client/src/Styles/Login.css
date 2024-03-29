@@ -20,20 +20,26 @@
     padding: 10px;
     font-size: 1.1rem;
   }
-  a {
-    text-decoration: none;
-    color: black;
-  }
-  button {
-    width: 130px;
-    height: 50px;
-    align-self: center;
-    font-size: 1.2rem;
-    background-color: #1a2f27;
-    color: white;
-    border: none;
-    border-radius: 5px;
-  }
+}
+.forgotPasswordBtn {
+  background: none;
+  border: none;
+  text-align: left;
+}
+.forgotPasswordBtn:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.loginButton {
+  width: 130px;
+  height: 50px;
+  align-self: center;
+  font-size: 1.2rem;
+  background-color: #1a2f27;
+  color: white;
+  border: none;
+  border-radius: 5px;
 }
 
 .loginPassword {
@@ -58,4 +64,10 @@
 }
 .loginButton:hover {
   transform: scale(1.05);
+  cursor: pointer;
+}
+.loginCreateAccount:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  text-decoration: underline;
 }

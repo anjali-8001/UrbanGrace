@@ -8,7 +8,6 @@ const requireSignIn = async (req, res, next) => {
     const decode = JWT.verify(
       req.headers.authorization,
       process.env.JWT_SECRET
-      
     );
     req.user = decode;
     next();
@@ -41,4 +40,24 @@ const requireAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = { requireSignIn, requireAdmin };
+const requireOid = async (req, res, next) => {
+  try {
+    const oid = req.cookies?.oid;
+    if (!oid) {
+      res.status(200).send({
+        success: false,
+        message: "Unauthorized Access",
+      });
+    } else {
+      next();
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(401).send({
+      success: false,
+      message: "Auth failed",
+    });
+  }
+};
+
+module.exports = { requireSignIn, requireAdmin, requireOid };

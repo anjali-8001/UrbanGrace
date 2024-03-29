@@ -17,6 +17,9 @@ import Spinner from "./Components/Spinner";
 import Cart from "./Pages/Cart";
 import ScrollToTopOnRouteChange from "./Components/ScrollToTopOnRouteChange";
 import Search from "./Pages/Search";
+import ForgotPassword from "./Pages/ForgotPassword";
+import ResetPassword from "./Pages/ResetPassword";
+import ForgotPasswordRoute from "./Components/ForgotPasswordRoute";
 
 function App() {
   const [loading] = useLoading();
@@ -30,6 +33,14 @@ function App() {
             <Route path="/" element={<Home />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
+
+            <Route path="/" element={<ForgotPasswordRoute />}>
+              <Route
+                path="/forgot-password"
+                element={<ForgotPassword />}
+              ></Route>
+              <Route path="/reset-password" element={<ResetPassword />}></Route>
+            </Route>
             <Route path="/account" element={<ProtectedRoute />}>
               <Route path="user" element={<Account />} />
             </Route>

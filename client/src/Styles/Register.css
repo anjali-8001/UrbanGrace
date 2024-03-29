@@ -63,3 +63,8 @@
 input:focus {
   outline: none;
 }
+.loginRedirect:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  text-decoration: underline;
+}

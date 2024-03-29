@@ -7,7 +7,7 @@ function Layout({ children }) {
   return (
     <div className="layout">
       <Navbar />
-      <main style={{ paddingTop: "80px" }}>{children}</main>
+      <main>{children}</main>
       <Newsletter />
       <Footer />
     </div>

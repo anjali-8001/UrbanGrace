@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useAuth } from "../Contexts/auth";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import { useRecovery } from "../Contexts/recovery";
 
 function Login() {
   const navigate = useNavigate();
@@ -14,6 +15,8 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState("password");
+  const [remail, setRemail] = useRecovery();
+  const [loading, setLoading] = useState();
 
   const [auth, setAuth] = useAuth();
 
@@ -41,6 +44,33 @@ function Login() {
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
+    }
+  };
+
+  const forgotPasswordHandler = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/auth/forgot-password`,
+        {
+          email,
+        },
+        {
+          withCredentials: true, // Include cookies in the request
+        }
+      );
+      if (res && res.data.success) {
+        console.log(res.data);
+        setRemail(email);
+        navigate("/forgot-password");
+        toast.success("Otp sent successfully");
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+      setLoading(false);
     }
   };
 
@@ -75,13 +105,17 @@ function Login() {
                 </p>
               )}
             </div>
-            <Link to="" className="loginForgotPassword">
+            <button
+              onClick={(event) => forgotPasswordHandler(event)}
+              className="forgotPasswordBtn"
+              disabled={loading && true}
+            >
               Forgot your password?
-            </Link>
+            </button>
             <button type="submit" className="loginButton">
               Sign In
             </button>
-            <Link to="/register" className="loginCreateAccount">
+            <Link to="/register" className="loginCreateAccount link">
               Create account
             </Link>
           </form>

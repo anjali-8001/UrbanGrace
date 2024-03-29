@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const connectDB = require("./config/db");
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
@@ -16,6 +17,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 connectDB();
 

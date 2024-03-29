@@ -90,7 +90,11 @@ function ProductsPage() {
             <ul className="productsNavbarList">
               {subcategories?.map((subcat, index) => {
                 return (
-                  <Link key={index} to={``} className="productsNavbarItem">
+                  <Link
+                    key={index}
+                    to={`/category/${subcat._id}`}
+                    className="productsNavbarItem"
+                  >
                     <li>{subcat.name}</li>
                   </Link>
                 );
