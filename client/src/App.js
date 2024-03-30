@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
@@ -15,57 +15,73 @@ import ProductDetails from "./Pages/ProductDetails";
 import { useLoading } from "./Contexts/loading";
 import Spinner from "./Components/Spinner";
 import Cart from "./Pages/Cart";
-import ScrollToTopOnRouteChange from "./Components/ScrollToTopOnRouteChange";
 import Search from "./Pages/Search";
 import ForgotPassword from "./Pages/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword";
 import ForgotPasswordRoute from "./Components/ForgotPasswordRoute";
+import { useLayoutEffect } from "react";
+
+const Wrapper = ({ children }) => {
+  const location = useLocation();
+  useLayoutEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
+  return children;
+};
 
 function App() {
   const [loading] = useLoading();
   return (
     <BrowserRouter>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
+      <Wrapper>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/register" element={<Register />}></Route>
 
-            <Route path="/" element={<ForgotPasswordRoute />}>
+              <Route path="/" element={<ForgotPasswordRoute />}>
+                <Route
+                  path="/forgot-password"
+                  element={<ForgotPassword />}
+                ></Route>
+                <Route
+                  path="/reset-password"
+                  element={<ResetPassword />}
+                ></Route>
+              </Route>
+              <Route path="/account" element={<ProtectedRoute />}>
+                <Route path="user" element={<Account />} />
+              </Route>
+              <Route path="/account" element={<AdminProtectedRoute />}>
+                <Route path="admin" element={<Account />} />
+                <Route
+                  path="admin/create-category"
+                  element={<CreateCategory />}
+                />
+                <Route
+                  path="admin/create-product"
+                  element={<CreateProduct />}
+                />
+              </Route>
               <Route
-                path="/forgot-password"
-                element={<ForgotPassword />}
+                path="/category/:categoryId"
+                element={<ProductsPage />}
               ></Route>
-              <Route path="/reset-password" element={<ResetPassword />}></Route>
-            </Route>
-            <Route path="/account" element={<ProtectedRoute />}>
-              <Route path="user" element={<Account />} />
-            </Route>
-            <Route path="/account" element={<AdminProtectedRoute />}>
-              <Route path="admin" element={<Account />} />
               <Route
-                path="admin/create-category"
-                element={<CreateCategory />}
-              />
-              <Route path="admin/create-product" element={<CreateProduct />} />
-            </Route>
-            <Route
-              path="/category/:categoryId"
-              element={<ProductsPage />}
-            ></Route>
-            <Route
-              path="/product/:productId"
-              element={<ProductDetails />}
-            ></Route>
-            <Route path="/cart" element={<Cart />}></Route>
-            <Route path="/search" element={<Search />}></Route>
-          </Routes>
-        </>
-      )}
-      <Toaster />
+                path="/product/:productId"
+                element={<ProductDetails />}
+              ></Route>
+              <Route path="/cart" element={<Cart />}></Route>
+              <Route path="/search" element={<Search />}></Route>
+            </Routes>
+          </>
+        )}
+        <Toaster />
+      </Wrapper>
     </BrowserRouter>
   );
 }
