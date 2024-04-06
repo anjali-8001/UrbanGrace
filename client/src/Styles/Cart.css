@@ -1,7 +1,12 @@
 .cart {
-  display: flex;
   min-height: 100vh;
   padding: 25px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.cartOuterContainer {
+  display: flex;
   gap: 40px;
 }
 .cartContainer {
@@ -101,4 +106,24 @@ td {
 }
 .totalamt {
   font-size: 1.8rem;
+}
+.continueShopping {
+  align-self: flex-start;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  color: rgb(41, 41, 41);
+  height: 55px;
+  width: 300px;
+  background-color: white;
+  border: 1px solid rgb(200, 198, 198);
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.backIcon {
+  height: 30px;
+  width: 30px;
 }

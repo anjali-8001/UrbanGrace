@@ -16,7 +16,7 @@ app.use(
     credentials: true,
   })
 );
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "10mb" }));
 app.use(cookieParser());
 
 connectDB();
@@ -26,11 +26,10 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", require("./routes/authRoute.js"));
-
 app.use("/category", require("./routes/categoryRoute.js"));
-
 app.use("/product", require("./routes/productRoute.js"));
 app.use("/cart", require("./routes/cartRoute.js"));
+app.use("/checkout", require("./routes/checkoutRoute.js"));
 
 const PORT = process.env.PORT || 8000;
 
