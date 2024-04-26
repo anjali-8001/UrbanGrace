@@ -126,8 +126,8 @@ const CartProvider = ({ children }) => {
   }, [auth]);
 
   useEffect(() => {
-    console.log(auth);
-    console.log(state);
+    // console.log(auth);
+    // console.log(state);
   }, [state, auth]);
   return (
     <CartContext.Provider value={{ ...state, addProductToCart,deleteProductFromCart }}>

@@ -8,3 +8,7 @@
   box-sizing: border-box;
   font-family: "Baskervville", serif;
 }
+.link {
+  text-decoration: none;
+  color: black;
+}

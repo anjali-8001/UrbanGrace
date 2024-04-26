@@ -2,10 +2,10 @@ const express = require("express");
 const {
   registerController,
   loginController,
-  testController,
   forgotPasswordController,
   verifyOtpController,
   resetPasswordController,
+  updateUserDetailsController,
 } = require("../controllers/authController");
 const {
   requireSignIn,
@@ -21,6 +21,8 @@ router.post("/login", loginController);
 router.post("/forgot-password", forgotPasswordController);
 router.post("/verify-otp", requireOid, verifyOtpController);
 router.put("/reset-password", requireOid, resetPasswordController);
+router.put("/update", requireSignIn, updateUserDetailsController);
+
 
 router.get("/auth-user", requireSignIn, (req, res) => {
   res.status(200).send({ ok: true });

@@ -53,7 +53,7 @@ function CreateProduct() {
   const getSubCategories = async () => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_API}/category/get-subcategories/${selectedCategory.id}`,
+        `${process.env.REACT_APP_API}/category/get-subcategories/${selectedCategory.value}`,
         {
           headers: {
             Authorization: auth?.token,

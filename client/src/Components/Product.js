@@ -4,14 +4,13 @@ import { FcLike } from "react-icons/fc";
 import { AiFillHeart } from "react-icons/ai";
 import { AiTwotoneHeart } from "react-icons/ai";
 
-
 function Product({ image, name, price, id }) {
   const [isLiked, setIsLiked] = useState(false);
 
   return (
     <div className="product">
       <div className="productImg">
-        <img src={image} alt="ProductImage" />
+        <img src={image} loading="lazy" alt="ProductImage" />
         {isLiked ? (
           <FcLike
             className="favButton"

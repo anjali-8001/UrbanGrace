@@ -271,14 +271,33 @@ const resetPasswordController = async (req, res) => {
   }
 };
 
-const testController = async (req, res) => {
+const updateUserDetailsController = async (req, res) => {
   try {
-    return res.send("Protected");
+    const { email, name, phone, address } = req.body;
+
+    const updatedUser = await userModel.findOneAndUpdate(
+      { email: email },
+      { name: name, phone: phone, address: address },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(500).send({
+        success: false,
+        message: "Something went wrong!",
+      });
+    }
+
+    res.status(200).send({
+      success: true,
+      message: "User details updated",
+      updatedUser,
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).send({
       success: false,
-      message: "Error in testController",
+      message: "Something went wrong!",
       error,
     });
   }
@@ -287,8 +306,8 @@ const testController = async (req, res) => {
 module.exports = {
   registerController,
   loginController,
-  testController,
   forgotPasswordController,
   verifyOtpController,
   resetPasswordController,
+  updateUserDetailsController,
 };

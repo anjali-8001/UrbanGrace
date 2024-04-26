@@ -61,7 +61,6 @@ function Login() {
         }
       );
       if (res && res.data.success) {
-        console.log(res.data);
         setRemail(email);
         navigate("/forgot-password");
         toast.success("Otp sent successfully");
@@ -85,6 +84,7 @@ function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               name="email"
+              autoComplete="on"
               placeholder="Email"
             />
             <div className="loginPassword">
@@ -93,6 +93,7 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 name="password"
+                autoComplete="off"
                 placeholder="Password"
               />
               {type === "password" ? (

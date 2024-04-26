@@ -107,8 +107,8 @@ const getCategoriesController = async (req, res) => {
 };
 const getSubCategoriesController = async (req, res) => {
   try {
-    const { id } = req.params;
-    const category = await categoryModel.findById(id);
+    const { categoryName } = req.params;
+    const category = await categoryModel.findOne({ name: categoryName });
     if (!category) {
       res.status(200).send({
         success: false,

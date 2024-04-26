@@ -46,16 +46,20 @@
   color: black;
   font-size: 1.05rem;
 }
+.navLink:hover {
+  text-decoration: underline;
+}
 .searchForm {
   display: flex;
   align-items: center;
+  justify-content: center;
   border: black 1px solid;
   border-radius: 20px;
   padding: 5px;
   gap: 5px;
+  margin: auto;
   input {
     width: 300px;
-    height: 30px;
     font-size: 1.05rem;
     border: none;
   }
@@ -64,7 +68,6 @@
     border-color: transparent;
   }
   button {
-    height: 30px;
     border: none;
     background-color: transparent;
   }
@@ -89,4 +92,53 @@
   text-align: center;
   font-size: 0.8rem;
   font-weight: bolder;
+}
+.loginicon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+.loginicon:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .searchForm {
+    border: none;
+    input {
+      display: none;
+    }
+  }
+  .navSignContainer {
+    gap: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+  .navLink {
+    font-size: 1rem;
+  }
+  .loginicon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+  }
+}
+@media (max-width: 400px) {
+  .navLinksContainer {
+    display: none;
+  }
+  .navbar {
+    justify-content: space-between;
+  }
 }

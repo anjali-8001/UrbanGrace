@@ -68,22 +68,23 @@
   align-items: center;
   gap: 10px;
 }
-.continueShopping {
-  align-self: flex-start;
-  font-size: 1.2rem;
-  font-weight: bolder;
-  color: rgb(41, 41, 41);
-  height: 55px;
-  width: 300px;
-  background-color: white;
-  border: 1px solid rgb(200, 198, 198);
-  border-radius: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
+
+@media (max-width: 600px) {
+  .footerLinksContainer {
+    display: none;
+  }
 }
-.backIcon {
-  height: 30px;
-  width: 30px;
+@media (max-width: 400px) {
+  .footer {
+    padding: 50px 25px;
+  }
+  .brandTitle {
+    flex-direction: column;
+    p {
+      font-size: 1rem;
+    }
+  }
+  .brandDescription {
+    display: none;
+  }
 }

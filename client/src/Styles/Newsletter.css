@@ -1,32 +1,101 @@
 .contactTextContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: rgb(209, 209, 209);
-    color: black;
-    padding: 80px 300px;
-    gap: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgb(209, 209, 209);
+  color: black;
+  padding: 80px 200px;
+  gap: 30px;
+}
+.contactTextHeading {
+  font-size: 3rem;
+  font-weight: bolder;
+}
+.contactText {
+  font-size: 1.5rem;
+}
+.contactUserEmail {
+  width: 300px;
+  height: 40px;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+.contactUserEmailButton {
+  height: 40px;
+  font-size: 1.2rem;
+  width: 150px;
+  background-color: #1a2f27;
+  color: rgb(209, 209, 209);
+  border: none;
+  border-radius: 2px;
+}
+@media (max-width: 900px) {
+  .contactTextContainer {
+    padding: 80px 100px;
   }
   .contactTextHeading {
-    font-size: 3rem;
-    font-weight: bolder;
+    font-size: 2.5rem;
   }
-  .contactText {
-    font-size: 1.5rem;
+  .contactEmail {
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
   }
   .contactUserEmail {
-    width: 300px;
+    width: 70vw;
     height: 40px;
-    padding: 10px;
+    padding: 20px;
     font-size: 1.2rem;
   }
+
   .contactUserEmailButton {
     height: 40px;
     font-size: 1.2rem;
     width: 150px;
     background-color: #1a2f27;
     color: rgb(209, 209, 209);
+    border: none;
+    border-radius: 2px;
   }
-  
+}
+
+@media (max-width: 600px) {
+  .contactTextContainer {
+    padding: 80px 50px;
+  }
+  .contactText {
+    font-size: 1rem;
+  }
+  .contactTextHeading {
+    font-size: 2rem;
+  }
+  .contactEmail {
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+  }
+  .contactUserEmail {
+    width: 80vw;
+    height: 40px;
+    padding: 20px;
+    font-size: 1rem;
+  }
+
+  .contactUserEmailButton {
+    height: 40px;
+    font-size: 1rem;
+    width: 150px;
+    background-color: #1a2f27;
+    color: rgb(209, 209, 209);
+    border: none;
+    border-radius: 2px;
+  }
+}

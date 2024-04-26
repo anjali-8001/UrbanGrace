@@ -30,7 +30,9 @@ function AccountNavbar({ children }) {
     <div className="accountNavbar">
       <div className="accountContainer">
         <div className="accountNavbarContainer">
-          <h1 className="accountNavbarHeading">My Account</h1>
+          <Link to="/account/user" className="link">
+            <h1 className="accountNavbarHeading">My Account</h1>
+          </Link>
           <div className="accountNavLinksContainer">
             {navbar.map((item, idx) => {
               return (

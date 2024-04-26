@@ -30,7 +30,7 @@ export default function Footer() {
               Home
             </Link>
             <Link
-              to="/category/65b87fd6716c79545c9431af"
+              to="/category/Men"
               className="footerLink"
             >
               Men Fashion
@@ -47,7 +47,7 @@ export default function Footer() {
               Cart
             </Link>
             <Link
-              to="/category/65b7bda383502abf27691113"
+              to="/category/Women"
               className="footerLink"
             >
               Women Fashion

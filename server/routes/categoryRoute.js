@@ -35,7 +35,7 @@ router.get(
 );
 
 router.get(
-  "/get-subcategories/:id",
+  "/get-subcategories/:categoryName",
   getSubCategoriesController
 );
 

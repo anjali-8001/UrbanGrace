@@ -157,7 +157,7 @@ const getFeaturedProductsController = async (req, res) => {
 
 const getProductsByCategoryController = async (req, res) => {
   try {
-    const { categoryId } = req.params;
+    const { categoryName } = req.params;
 
     const pageSize = 8;
     const { page = 1 } = req.body;
@@ -165,9 +165,19 @@ const getProductsByCategoryController = async (req, res) => {
 
     const pipeline = [
       {
-        $match: {
-          category: new mongoose.Types.ObjectId(categoryId),
+        $lookup: {
+          from: "categories",
+          localField: "category",
+          foreignField: "_id",
+          as: "category",
         },
+      },
+      {
+        $unwind: "$category",
+      },
+
+      {
+        $match: { "category.name": categoryName },
       },
       {
         $skip: skip,
@@ -260,8 +270,14 @@ const searchProductController = async (req, res) => {
 };
 const getProductsBySubCategoryController = async (req, res) => {
   try {
-    const { subcatName } = req.params;
+    const { catName, subcatName } = req.params;
 
+    const category = await categoryModel.findOne({ name: catName });
+
+    const subcat = category.subCategories.find((subcat) => {
+      return subcat.name === subcatName;
+    });
+    const subcatId = subcat._id;
     const pageSize = 8;
     const { page = 1 } = req.body;
     const skip = (page - 1) * pageSize;
@@ -269,7 +285,7 @@ const getProductsBySubCategoryController = async (req, res) => {
     const pipeline = [
       {
         $match: {
-          slug: subcatName,
+          subcategory: new mongoose.Types.ObjectId(subcatId),
         },
       },
       {

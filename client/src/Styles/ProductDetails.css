@@ -1,19 +1,18 @@
 .productDetailsPage {
   padding: 45px 100px;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   gap: 50px;
 }
 .productImageContainer {
-  flex: 1;
   img {
-    height: 80vh;
+    height: 70vh;
+    width: auto;
     position: sticky;
     top: 145px;
   }
 }
 .productDetailsContainer {
-  flex: 1.3;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -108,6 +107,10 @@
     border: none;
     cursor: pointer;
   }
+  button:hover {
+    background-color: #05261a;
+    color: rgb(228, 189, 11);
+  }
 }
 .productDescription {
   color: rgb(98, 97, 97);
@@ -131,4 +134,18 @@ hr {
 }
 .productDetailsloader {
   min-height: 100vh;
+}
+
+@media (max-width: 1100px) {
+  .productDetailsPage {
+    padding: 45px 50px;
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
+  .productImageContainer {
+    img {
+      width: 60vw;
+      height: auto;
+    }
+  }
 }

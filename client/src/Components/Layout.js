@@ -1,15 +1,17 @@
-import React from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import Newsletter from "./Newsletter";
+import React, { Suspense } from "react";
+const Navbar = React.lazy(() => import("./Navbar"));
+const Footer = React.lazy(() => import("./Footer"));
+const Newsletter = React.lazy(() => import("./Newsletter"));
 
 function Layout({ children }) {
   return (
     <div className="layout">
-      <Navbar />
-      <main>{children}</main>
-      <Newsletter />
-      <Footer />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Navbar />
+        <main>{children}</main>
+        <Newsletter />
+        <Footer />
+      </Suspense>
     </div>
   );
 }

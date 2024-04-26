@@ -12,10 +12,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 function Cart() {
-  const { cart, totalPrice, totalItems } = useCart();
+  const [auth] = useAuth();
+  const { cart, totalPrice, totalItems, deleteProductFromCart } = useCart();
+  const [checkoutDisbaled, setCheckoutDisabled] = useState(false);
   const navigate = useNavigate();
-  const { deleteProductFromCart } = useCart();
-  const { auth } = useAuth();
 
   const handleDeleteItem = async (productId, size) => {
     deleteProductFromCart(productId, size);
@@ -23,32 +23,35 @@ function Cart() {
 
   const handleCheckout = async () => {
     const stripe = await loadStripe(`${process.env.PUBLISHABLE_KEY}`);
-
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API}/checkout/create-checkout-session`,
-        {
-          cart: cart,
-        },
-        {
-          headers: {
-            Authorization: auth?.token,
+      if (auth?.user) {
+        const res = await axios.post(
+          `${process.env.REACT_APP_API}/checkout/create-checkout-session`,
+          {
+            user: auth?.user,
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: auth?.token,
+            },
+          }
+        );
 
-      if (res?.data?.success) {
-        const session = res.data.id;
-        console.log(res.data.id);
-        const result = stripe.redirectToCheckout({
-          sessionId: session,
-        });
+        if (res?.data?.success) {
+          const session = res.data.url;
+          console.log(res.data.url);
+          window.location.href = session;
+        }
       }
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data.message);
     }
   };
+
+  useEffect(() => {
+    setCheckoutDisabled(totalPrice === 0);
+  }, [totalPrice]);
 
   return (
     <Layout>
@@ -111,21 +114,6 @@ function Cart() {
                       );
                     })}
                 </table>
-                <div className="cartTotalContainer">
-                  <p>
-                    <b>SubTotal: </b>
-                    <span>₹{totalPrice}</span>
-                  </p>
-                  <p>
-                    <b>Shipping: </b>
-                    <span>₹0</span>
-                  </p>
-                  <hr />
-                  <p>
-                    <b>Total: </b>
-                    <span className="totalamt">₹{totalPrice}</span>
-                  </p>
-                </div>
                 <button
                   className="continueShopping"
                   onClick={() => navigate(-1)}
@@ -147,9 +135,26 @@ function Cart() {
               </>
             )}
           </div>
-          <div className="paymentContainer">
-            <h1 className="paymentHeading">Payment Info</h1>
-            <button onClick={handleCheckout} className="paymentCheckout">
+          <div className="orderContainer">
+            <h1 className="orderHeading">Order Summary</h1>
+            <hr />
+            <div className="orderDetails">
+              <div className="orderItem">
+                <p>Subtotal: </p>
+                <p>₹{totalPrice}</p>
+              </div>
+              <div className="orderItem">
+                <p>Shipping: </p>
+                <p>Free</p>
+              </div>
+              <div className="orderItem couponCode">Add coupon code →</div>
+            </div>
+            <hr />
+            <div className="orderTotal">
+              <p>Total: </p>
+              <p>₹{totalPrice}</p>
+            </div>
+            <button onClick={handleCheckout} className="paymentCheckout" disabled={checkoutDisbaled}>
               Checkout
             </button>
           </div>

@@ -20,10 +20,10 @@ router.post(
   createProductController
 );
 
-router.post("/get-products/:categoryId", getProductsByCategoryController);
+router.post("/get-products/:categoryName", getProductsByCategoryController);
 
-router.get(
-  "/get-productsByType/:subcatName",
+router.post(
+  "/get-productsByType/:catName/:subcatName",
   getProductsBySubCategoryController
 );
 

@@ -57,31 +57,28 @@
   width: 800px;
 }
 .homeItems1 {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
   padding: 0px 50px 100px 50px;
 }
 
 .homeItems2 {
   display: flex;
-  padding: 0px 40px 0px 100px;
-  height: 80vh;
-  position: relative;
+  gap: 50px;
+  padding: 50px;
+  place-items: center;
+  justify-items: center;
+}
+.homeItem2ImgContainer {
+  height: auto;
+  max-width: 400px;
 }
 .homeItem2Img {
-  height: 100%;
-  position: absolute;
-  top: 50px;
-  right: 100px;
-  width: 400px;
-  img {
-    width: 100%;
-  }
+  width: 100%;
 }
 .homeItem2TextContainer {
   width: 100%;
-  margin-right: 480px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -103,7 +100,7 @@
   text-align: center;
   background-color: #1a2f27;
   color: white;
-  padding: 80px 300px;
+  padding: 80px 220px;
   gap: 30px;
 }
 .discountTextHeading {
@@ -117,4 +114,93 @@
 .discountEmail {
   font-size: 1.5rem;
   color: rgb(209, 209, 209);
+}
+@media (max-width: 900px) {
+  .banner {
+    left: 50px;
+    width: 400px;
+    color: white;
+    gap: 25px;
+  }
+  .bannerTextHeading {
+    font-size: 3rem;
+  }
+  .tagline {
+    font-size: 2rem;
+  }
+  .homeItems1 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .discountTextContainer {
+    padding: 80px 100px;
+  }
+  .discountTextHeading {
+    font-size: 2rem;
+  }
+  .homeItems2 {
+    flex-direction: column-reverse;
+    padding: 50px 50px;
+  }
+  .homeItem2ImgContainer {
+    display: flex;
+    justify-content: center;
+  }
+  .homeItem2Img {
+    width: 300px;
+    height: auto;
+    margin: auto;
+  }
+
+  .homeItem2TextHeading {
+    font-size: 2rem;
+  }
+  .homeItem2Text {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .banner {
+    left: 50px;
+    width: 300px;
+    color: white;
+    gap: 25px;
+  }
+  .bannerTextHeading {
+    font-size: 2rem;
+  }
+  .homeTaglineContainer {
+    font-size: 2rem;
+    padding: 50px 50px;
+  }
+  .tagline {
+    width: auto;
+  }
+  .discountTextContainer {
+    padding: 50px 50px;
+  }
+  .discountTextHeading {
+    font-size: 2rem;
+  }
+  .discountText {
+    font-size: 1rem;
+  }
+  .discountEmail {
+    font-size: 1rem;
+  }
+  .homeItem2Img {
+    width: 150px;
+    height: auto;
+    margin: auto;
+  }
+  .bannerButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+@media (max-width: 400px) {
+  .banner {
+    width: auto;
+    left: auto;
+  }
 }

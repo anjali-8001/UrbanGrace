@@ -49,6 +49,10 @@ function ProductDetails() {
   // };
 
   const handleAddProduct = async () => {
+    if (!auth?.user) {
+      navigate("/login");
+      toast.error("User login required");
+    }
     await addProductToCart(productId, quantity, size);
   };
   // };
@@ -150,6 +154,7 @@ function ProductDetails() {
                   type="Text"
                   className="numberInput"
                   value={quantity}
+                  name="number"
                   onChange={(event) =>
                     setQuantity(event.target.value.replace(/\D/g, ""))
                   }

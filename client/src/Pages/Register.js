@@ -78,7 +78,6 @@ function Register() {
         }
       );
       if (res.data.success) {
-        console.log("Registered Successfully");
         toast.success(res.data.message);
         navigate("/login");
       } else {
@@ -99,19 +98,24 @@ function Register() {
             <input
               type="text"
               value={name}
+              name="name"
               onChange={(e) => setName(e.target.value)}
               placeholder="Name"
+              autoComplete="yes"
             />
             <input
               type="email"
               value={email}
+              name="email"
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
+              autoComplete="yes"
             />
             <div className="registerPassword">
               <input
                 type={type}
                 value={password}
+                name="password"
                 onChange={(e) => handleChange(e.target.value)}
                 onFocus={() => setIsPasswordFocused(true)}
                 onBlur={() => setIsPasswordFocused(false)}

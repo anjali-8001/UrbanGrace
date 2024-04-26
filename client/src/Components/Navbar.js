@@ -12,6 +12,7 @@ import { useSearch } from "../Contexts/search";
 import { useCategory } from "../Contexts/category";
 import logo from "../Images/logo.jpeg";
 import { useCart } from "../Contexts/cart";
+import { CiLogin } from "react-icons/ci";
 
 function Navbar() {
   const [auth] = useAuth();
@@ -43,7 +44,7 @@ function Navbar() {
     <div className="navbar">
       <div className="navLogoContainer">
         <Link to="/" className="navLink">
-          <img src={logo} alt="" />
+          <img src={logo} alt="Logo" />
         </Link>
       </div>
 
@@ -51,7 +52,7 @@ function Navbar() {
         {categories?.map((category) => {
           return (
             <div key={category._id}>
-              <Link to={`/category/${category._id}`} className="navLink">
+              <Link to={`/category/${category.name}`} className="navLink">
                 {category.name}
               </Link>
             </div>
@@ -61,13 +62,14 @@ function Navbar() {
       <div className="navSignContainer">
         <div>
           <form className="searchForm" onSubmit={handleSubmit}>
-            <button type="submit">
+            <button type="submit" aria-label="Search">
               <IoIosSearch className="searchicon" size={27} color="black" />
             </button>
             <input
               type="input"
               placeholder="Search"
               value={values.keyword}
+              name="search"
               onChange={(e) =>
                 setValues({ ...values, keyword: e.target.value })
               }
@@ -75,30 +77,51 @@ function Navbar() {
           </form>
         </div>
 
-        <div>
-          <Link>
-            <FaRegHeart className="likeIcon" size={25} color="black" />
-          </Link>
-        </div>
-        <div className="cartIcon">
-          <Link to="/cart" className="link">
-            <MdOutlineShoppingCart className="carticon" size={26} />
-            <span className="cartTotalItems">{totalItems}</span>
-          </Link>
-        </div>
-        <div>
-          <Link
-            to={
-              auth.user
-                ? auth.user.isAdmin
-                  ? "/account/admin"
-                  : "/account/user"
-                : "/login"
-            }
-          >
-            <FaRegUser className="usericon" size={23} color="black" />
-          </Link>
-        </div>
+        {auth?.user ? (
+          <>
+            <div>
+              <Link>
+                <FaRegHeart
+                  className="likeIcon"
+                  size={25}
+                  color="black"
+                  aria-label="Wishlist"
+                />
+              </Link>
+            </div>
+            <div className="cartIcon">
+              <Link to="/cart" className="link">
+                <MdOutlineShoppingCart className="carticon" size={26} />
+                <span className="cartTotalItems">{totalItems}</span>
+              </Link>
+            </div>
+            <div>
+              <Link
+                to={
+                  auth.user
+                    ? auth.user.isAdmin
+                      ? "/account/admin/create-category"
+                      : "/account/user/orders"
+                    : "/login"
+                }
+              >
+                <FaRegUser
+                  className="usericon"
+                  size={23}
+                  color="black"
+                  aria-label="Profile"
+                />
+              </Link>
+            </div>
+          </>
+        ) : (
+          <>
+            <Link className="loginicon" to="/login">
+              <span>Login</span>
+              <CiLogin className="" size={23} color="black" />
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

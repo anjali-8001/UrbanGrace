@@ -1,5 +1,5 @@
 import React from "react";
-import "../Styles/Newsletter.css"
+import "../Styles/Newsletter.css";
 
 function Newsletter() {
   return (
@@ -13,7 +13,7 @@ function Newsletter() {
           <input
             className="contactUserEmail"
             type="email"
-            name="contactUserEmail"
+            name="newsletterEmail"
             placeholder="Your e-mail"
           />
           <button type="submit" className="contactUserEmailButton">

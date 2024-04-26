@@ -1,0 +1,47 @@
+.ordersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgb(243, 239, 239);
+  padding: 20px;
+  min-height: 100%;
+}
+.orderdetailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: white;
+  padding: 20px;
+}
+.orderNumber {
+  letter-spacing: 1.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  h5 {
+    color: rgb(73, 72, 72);
+  }
+  p {
+    font-size: 1.2rem;
+  }
+}
+.orderDate {
+  font-size: 1.1rem;
+}
+.orderImgs {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+.orderImg {
+  width: 80px;
+  height: auto;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+.orderStatus,
+.orderAddress {
+  text-transform: capitalize;
+}

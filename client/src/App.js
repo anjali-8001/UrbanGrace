@@ -1,25 +1,37 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
 import "react-toastify/dist/ReactToastify.css";
-import Account from "./Pages/UserPages/Account";
 import { Toaster } from "react-hot-toast";
 import { ProtectedRoute } from "./Components/ProtectedRoute";
 import AdminProtectedRoute from "./Components/AdminProtectedRoute";
-import CreateCategory from "./Pages/AdminPages/CreateCategory";
-import CreateProduct from "./Pages/AdminPages/CreateProduct";
-import ProductsPage from "./Pages/ProductsPage";
-import ProductDetails from "./Pages/ProductDetails";
 import { useLoading } from "./Contexts/loading";
-import Spinner from "./Components/Spinner";
-import Cart from "./Pages/Cart";
-import Search from "./Pages/Search";
-import ForgotPassword from "./Pages/ForgotPassword";
-import ResetPassword from "./Pages/ResetPassword";
-import ForgotPasswordRoute from "./Components/ForgotPasswordRoute";
-import { useLayoutEffect } from "react";
+import React, { Suspense, useLayoutEffect } from "react";
+const ProductsPage = React.lazy(() => import("./Pages/ProductsPage"));
+const Orders = React.lazy(() => import("./Pages/UserPages/Orders"));
+const AccountSettings = React.lazy(() =>
+  import("./Pages/UserPages/AccountSettings")
+);
+const ProductsSubcatPage = React.lazy(() =>
+  import("./Pages/ProductsSubcatPage")
+);
+const ForgotPasswordRoute = React.lazy(() =>
+  import("./Components/ForgotPasswordRoute")
+);
+const ProductDetails = React.lazy(() => import("./Pages/ProductDetails"));
+const CreateProduct = React.lazy(() =>
+  import("./Pages/AdminPages/CreateProduct")
+);
+const CreateCategory = React.lazy(() =>
+  import("./Pages/AdminPages/CreateCategory")
+);
+const Cart = React.lazy(() => import("./Pages/Cart"));
+const Search = React.lazy(() => import("./Pages/Search"));
+const ForgotPassword = React.lazy(() => import("./Pages/ForgotPassword"));
+const ResetPassword = React.lazy(() => import("./Pages/ResetPassword"));
+const Home = React.lazy(() => import("./Pages/Home"));
+const Login = React.lazy(() => import("./Pages/Login"));
+const Register = React.lazy(() => import("./Pages/Register"));
+const Spinner = React.lazy(() => import("./Components/Spinner"));
 
 const Wrapper = ({ children }) => {
   const location = useLocation();
@@ -38,46 +50,57 @@ function App() {
           <Spinner />
         ) : (
           <>
-            <Routes>
-              <Route path="/" element={<Home />}></Route>
-              <Route path="/login" element={<Login />}></Route>
-              <Route path="/register" element={<Register />}></Route>
+            <Suspense fallback={<Spinner />}>
+              <Routes>
+                <Route path="/" element={<Home />}></Route>
+                <Route path="/login" element={<Login />}></Route>
+                <Route path="/register" element={<Register />}></Route>
 
-              <Route path="/" element={<ForgotPasswordRoute />}>
+                <Route path="/" element={<ForgotPasswordRoute />}>
+                  <Route
+                    path="/forgot-password"
+                    element={<ForgotPassword />}
+                  ></Route>
+                  <Route
+                    path="/reset-password"
+                    element={<ResetPassword />}
+                  ></Route>
+                </Route>
+                <Route path="/account" element={<ProtectedRoute />}>
+                  <Route path="user/orders" element={<Orders />} />
+                  <Route
+                    path="user/account-settings"
+                    element={<AccountSettings />}
+                  />
+
+                  {/* <Route path="user" element={<Account />} /> */}
+                </Route>
+                <Route path="/account" element={<AdminProtectedRoute />}>
+                  <Route
+                    path="admin/create-category"
+                    element={<CreateCategory />}
+                  />
+                  <Route
+                    path="admin/create-product"
+                    element={<CreateProduct />}
+                  />
+                </Route>
                 <Route
-                  path="/forgot-password"
-                  element={<ForgotPassword />}
+                  path="/category/:categoryName"
+                  element={<ProductsPage />}
                 ></Route>
                 <Route
-                  path="/reset-password"
-                  element={<ResetPassword />}
+                  path="/category/:categoryName/:subcategoryName"
+                  element={<ProductsSubcatPage />}
                 ></Route>
-              </Route>
-              <Route path="/account" element={<ProtectedRoute />}>
-                <Route path="user" element={<Account />} />
-              </Route>
-              <Route path="/account" element={<AdminProtectedRoute />}>
-                <Route path="admin" element={<Account />} />
                 <Route
-                  path="admin/create-category"
-                  element={<CreateCategory />}
-                />
-                <Route
-                  path="admin/create-product"
-                  element={<CreateProduct />}
-                />
-              </Route>
-              <Route
-                path="/category/:categoryId"
-                element={<ProductsPage />}
-              ></Route>
-              <Route
-                path="/product/:productId"
-                element={<ProductDetails />}
-              ></Route>
-              <Route path="/cart" element={<Cart />}></Route>
-              <Route path="/search" element={<Search />}></Route>
-            </Routes>
+                  path="/product/:productId"
+                  element={<ProductDetails />}
+                ></Route>
+                <Route path="/cart" element={<Cart />}></Route>
+                <Route path="/search" element={<Search />}></Route>
+              </Routes>
+            </Suspense>
           </>
         )}
         <Toaster />
