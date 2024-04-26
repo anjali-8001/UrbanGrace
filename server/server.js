@@ -12,7 +12,9 @@ require("dotenv").config();
 const app = express();
 app.use(
   cors({
-    origin: process.env.ORG_URL,
+    origin: "https://urbangrace.vercel.app",
+    methods: ["POST", "GET"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
@@ -85,7 +87,6 @@ app.use("/product", require("./routes/productRoute.js"));
 app.use("/cart", require("./routes/cartRoute.js"));
 app.use("/checkout", require("./routes/checkoutRoute.js"));
 app.use("/order", require("./routes/orderRoute.js"));
-
 
 const PORT = process.env.PORT || 8000;
 
