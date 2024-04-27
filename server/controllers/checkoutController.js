@@ -51,8 +51,8 @@ const createCheckoutController = async (req, res) => {
       // invoice_creation: {
       //   enabled: true,
       // },
-      success_url: "http://localhost:3000/",
-      cancel_url: "http://localhost:3000/",
+      success_url: "https://urbangrace.vercel.app/",
+      cancel_url: "https://urbangrace.vercel.app/",
     });
 
     res.status(200).send({
