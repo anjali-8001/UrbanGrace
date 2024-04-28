@@ -9,14 +9,12 @@ import { FaRegHeart } from "react-icons/fa6";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useSearch } from "../Contexts/search";
-import { useCategory } from "../Contexts/category";
 import logo from "../Images/logo.jpeg";
 import { useCart } from "../Contexts/cart";
 import { CiLogin } from "react-icons/ci";
 
 function Navbar() {
   const [auth] = useAuth();
-  const [categories] = useCategory();
   const [values, setValues] = useSearch();
   const navigate = useNavigate();
   const { totalItems } = useCart();
@@ -49,15 +47,12 @@ function Navbar() {
       </div>
 
       <div className="navLinksContainer">
-        {categories?.map((category) => {
-          return (
-            <div key={category._id}>
-              <Link to={`/category/${category.name}`} className="navLink">
-                {category.name}
-              </Link>
-            </div>
-          );
-        })}
+        <Link to="/category/Women" className="navLink">
+          Women
+        </Link>
+        <Link to="/category/Men" className="navLink">
+          Men
+        </Link>
       </div>
       <div className="navSignContainer">
         <div>

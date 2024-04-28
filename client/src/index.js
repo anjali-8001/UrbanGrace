@@ -6,7 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./Contexts/auth";
 import { LoadingProvider } from "./Contexts/loading";
 import { SearchProvider } from "./Contexts/search";
-import { CategoryProvider } from "./Contexts/category";
 import { ProductProvider } from "./Contexts/product";
 import { CartProvider } from "./Contexts/cart";
 import { RecoveryProvider } from "./Contexts/recovery";
@@ -17,15 +16,13 @@ root.render(
     <AuthProvider>
       <ProductProvider>
         <LoadingProvider>
-          <CategoryProvider>
-            <SearchProvider>
-              <CartProvider>
-                <RecoveryProvider>
-                  <App />
-                </RecoveryProvider>
-              </CartProvider>
-            </SearchProvider>
-          </CategoryProvider>
+          <SearchProvider>
+            <CartProvider>
+              <RecoveryProvider>
+                <App />
+              </RecoveryProvider>
+            </CartProvider>
+          </SearchProvider>
         </LoadingProvider>
       </ProductProvider>
     </AuthProvider>

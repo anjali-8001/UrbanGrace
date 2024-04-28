@@ -25,7 +25,7 @@ function Spinner({ path = "/login" }) {
 
   return (
     <div className="spinner">
-      <h3>Redirecting in {count} seconds</h3>
+      <h3>Loading</h3>
       <br />
       <ScaleLoader height={50} margin={5} />
     </div>
