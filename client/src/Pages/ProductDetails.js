@@ -45,7 +45,11 @@ function ProductDetails() {
   };
 
   const handleAddProduct = async () => {
-    addProductToCart(productId, quantity, size);
+    if (!auth?.user) {
+      navigate("/login");
+    } else {
+      addProductToCart(productId, quantity, size);
+    }
   };
 
   useEffect(() => {
