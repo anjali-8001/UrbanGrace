@@ -3,6 +3,7 @@ import "../Styles/Home.css";
 import { useProduct } from "../Contexts/product";
 import { Link } from "react-router-dom";
 import Spinner from "../Components/Spinner";
+import ProductSkeleton from "../Components/Skeletons/ProductSkeleton";
 const Product = React.lazy(() => import("../Components/Product"));
 const Layout = React.lazy(() => import("../Components/Layout"));
 
@@ -42,7 +43,7 @@ function Home() {
                 className="link"
                 to={`/product/${product._id}`}
               >
-                <Suspense fallback={<Spinner />}>
+                <Suspense fallback={<ProductSkeleton />}>
                   <Product
                     key={product.id}
                     name={product.name}

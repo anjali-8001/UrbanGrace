@@ -1,12 +1,12 @@
-import "../Styles/ProductsSubcatPage.css";
-import React, { useEffect, useState } from "react";
+import "../Styles/ProductsPage.css";
+import axios from "axios";
+import React, { Suspense, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Layout from "../Components/Layout";
-import Product from "../Components/Product";
-import axios from "axios";
 import { useAuth } from "../Contexts/auth";
 import toast from "react-hot-toast";
-import { useInView } from "react-intersection-observer";
+import ProductSkeleton from "../Components/Skeletons/ProductSkeleton";
+const Product = React.lazy(() => import("../Components/Product"));
 
 function ProductsSubcatPage() {
   const { categoryName, subcategoryName } = useParams();
@@ -15,7 +15,6 @@ function ProductsSubcatPage() {
   const [auth] = useAuth();
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const { ref, inView } = useInView();
   const getSubCategories = async () => {
     try {
       const res = await axios.get(
@@ -52,12 +51,11 @@ function ProductsSubcatPage() {
       );
       if (res?.data.success) {
         const newProducts = res.data.products;
-        if (newProducts.length === 0) {
-          setLoading(false);
-          return;
+        if (page === 1) {
+          setProducts(newProducts);
+        } else {
+          setProducts((prevData) => [...prevData, ...newProducts]);
         }
-        setProducts((prevData) => [...prevData, ...newProducts]);
-        setPage((prevPage) => prevPage + 1);
         setLoading(false);
       }
     } catch (error) {
@@ -65,20 +63,48 @@ function ProductsSubcatPage() {
       toast.error("Something went wrong in getting products");
     }
   };
+  const handleInfiniteScroll = () => {
+    try {
+      if (
+        !loading &&
+        window.innerHeight + document.documentElement.scrollTop + 600 >
+          document.documentElement.scrollHeight
+      ) {
+        setLoading(true);
+        setPage((prevPage) => prevPage + 1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        timeout = null;
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
 
   useEffect(() => {
-    if (inView && !loading) {
-      // console.log("inview useffect");
-      getProducts();
-    }
-  }, [inView, categoryName, subcategoryName]);
+    const debouncedScrollHandler = debounce(handleInfiniteScroll, 200); // Adjust the debounce time as needed
+    window.addEventListener("scroll", debouncedScrollHandler);
+    return () => window.removeEventListener("scroll", debouncedScrollHandler);
+  }, []);
 
   useEffect(() => {
     getSubCategories();
-    setPage(1);
     setProducts([]);
-    window.scrollTo(0, 0);
-  }, [categoryName, subcategoryName]);
+    setPage(1);
+  }, [categoryName]);
+
+  useEffect(() => {
+    getProducts();
+  }, [page, categoryName, subcategoryName]);
 
   return (
     <div className="productsPage">
@@ -104,23 +130,25 @@ function ProductsSubcatPage() {
             <div className="productsContainer">
               {products?.map((product, index) => {
                 return (
-                  <Link
-                    key={product._id}
-                    className="link"
-                    to={`/product/${product._id}`}
-                  >
-                    <Product
-                      name={product.name}
-                      price={product.price}
-                      image={product.image.url}
-                    />{" "}
-                  </Link>
+                  <Suspense key={index} fallback={<ProductSkeleton />}>
+                    <Link
+                      key={index}
+                      className="link"
+                      to={`/product/${product._id}`}
+                    >
+                      <Product
+                        key={index}
+                        name={product.name}
+                        price={product.price}
+                        image={product.image.url}
+                        className="productsPageProduct"
+                      />{" "}
+                    </Link>
+                  </Suspense>
                 );
               })}
             </div>
-            <div ref={ref} className="loader">
-              {loading && <p>Loading</p>}
-            </div>
+            <div className="loader">{loading && <p>Loading</p>}</div>
           </div>
         </div>
       </Layout>

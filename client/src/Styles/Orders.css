@@ -45,3 +45,7 @@
 .orderAddress {
   text-transform: capitalize;
 }
+
+@media(max-width: 1300px){
+  
+}

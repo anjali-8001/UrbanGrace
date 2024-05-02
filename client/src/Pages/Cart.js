@@ -39,7 +39,6 @@ function Cart() {
 
         if (res?.data?.success) {
           const session = res.data.url;
-          console.log(res.data.url);
           window.location.href = session;
         }
       }
@@ -154,7 +153,11 @@ function Cart() {
               <p>Total: </p>
               <p>₹{totalPrice}</p>
             </div>
-            <button onClick={handleCheckout} className="paymentCheckout" disabled={checkoutDisbaled}>
+            <button
+              onClick={handleCheckout}
+              className="paymentCheckout"
+              disabled={checkoutDisbaled}
+            >
               Checkout
             </button>
           </div>

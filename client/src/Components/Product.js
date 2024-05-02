@@ -10,7 +10,7 @@ function Product({ image, name, price, id }) {
   return (
     <div className="product">
       <div className="productImg">
-        <img src={image} loading="lazy" alt="ProductImage" />
+        <img src={image} width="300" height="400" loading="lazy" alt="ProductImage" />
         {isLiked ? (
           <FcLike
             className="favButton"

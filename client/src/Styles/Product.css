@@ -8,18 +8,19 @@
 }
 .productImg {
   position: relative;
+  img {
+    width: 100%;
+    height: auto;
+  }
 }
-.productImg img {
-  width: 100%;
-  height: auto;
-}
+
 .favButton {
   position: absolute;
   bottom: 10px;
   right: 5px;
   /* background-color: white; */
   z-index: 100;
-  svg{
+  svg {
     fill: yellow;
   }
 }

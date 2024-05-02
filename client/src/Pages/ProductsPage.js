@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Layout from "../Components/Layout";
-// import Product from "../Components/Product";
 import "../Styles/ProductsPage.css";
 import axios from "axios";
 import { useAuth } from "../Contexts/auth";
 import toast from "react-hot-toast";
+import ProductSkeleton from "../Components/Skeletons/ProductSkeleton";
 const Product = React.lazy(() => import("../Components/Product"));
 
 function ProductsPage() {
@@ -38,6 +38,7 @@ function ProductsPage() {
 
   const getProducts = async () => {
     try {
+      setLoading(true);
       const res = await axios.post(
         `${process.env.REACT_APP_API}/product/get-products/${categoryName}`,
         {
@@ -74,7 +75,7 @@ function ProductsPage() {
     try {
       if (
         !loading &&
-        window.innerHeight + document.documentElement.scrollTop + 400 >
+        window.innerHeight + document.documentElement.scrollTop + 600 >
           document.documentElement.scrollHeight
       ) {
         setLoading(true);
@@ -138,18 +139,20 @@ function ProductsPage() {
             <div className="productsContainer">
               {products?.map((product, index) => {
                 return (
-                  <Link
-                    key={index}
-                    className="link"
-                    to={`/product/${product._id}`}
-                  >
-                    <Product
-                      name={product.name}
-                      price={product.price}
-                      image={product.image.url}
-                      className="productsPageProduct"
-                    />{" "}
-                  </Link>
+                  <Suspense fallback={<ProductSkeleton />}>
+                    <Link
+                      key={index}
+                      className="link"
+                      to={`/product/${product._id}`}
+                    >
+                      <Product
+                        name={product.name}
+                        price={product.price}
+                        image={product.image.url}
+                        className="productsPageProduct"
+                      />{" "}
+                    </Link>
+                  </Suspense>
                 );
               })}
             </div>

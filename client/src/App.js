@@ -4,8 +4,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Toaster } from "react-hot-toast";
 import { ProtectedRoute } from "./Components/ProtectedRoute";
 import AdminProtectedRoute from "./Components/AdminProtectedRoute";
-import { useLoading } from "./Contexts/loading";
 import React, { Suspense, useLayoutEffect } from "react";
+import ProductDetailsSkeleton from "./Components/Skeletons/ProductDetailsSkeleton";
 const ProductsPage = React.lazy(() => import("./Pages/ProductsPage"));
 const Orders = React.lazy(() => import("./Pages/UserPages/Orders"));
 const AccountSettings = React.lazy(() =>
@@ -42,67 +42,59 @@ const Wrapper = ({ children }) => {
 };
 
 function App() {
-  const [loading] = useLoading();
   return (
     <BrowserRouter>
       <Wrapper>
-        {loading ? (
-          <Spinner />
-        ) : (
-          <>
-            <Suspense fallback={<Spinner />}>
-              <Routes>
-                <Route path="/" element={<Home />}></Route>
-                <Route path="/login" element={<Login />}></Route>
-                <Route path="/register" element={<Register />}></Route>
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/register" element={<Register />}></Route>
 
-                <Route path="/" element={<ForgotPasswordRoute />}>
-                  <Route
-                    path="/forgot-password"
-                    element={<ForgotPassword />}
-                  ></Route>
-                  <Route
-                    path="/reset-password"
-                    element={<ResetPassword />}
-                  ></Route>
-                </Route>
-                <Route path="/account" element={<ProtectedRoute />}>
-                  <Route path="user/orders" element={<Orders />} />
-                  <Route
-                    path="user/account-settings"
-                    element={<AccountSettings />}
-                  />
+            <Route path="/" element={<ForgotPasswordRoute />}>
+              <Route
+                path="/forgot-password"
+                element={<ForgotPassword />}
+              ></Route>
+              <Route path="/reset-password" element={<ResetPassword />}></Route>
+            </Route>
+            <Route path="/account" element={<ProtectedRoute />}>
+              <Route path="user/orders" element={<Orders />} />
+              <Route
+                path="user/account-settings"
+                element={<AccountSettings />}
+              />
 
-                  {/* <Route path="user" element={<Account />} /> */}
-                </Route>
-                <Route path="/account" element={<AdminProtectedRoute />}>
-                  <Route
-                    path="admin/create-category"
-                    element={<CreateCategory />}
-                  />
-                  <Route
-                    path="admin/create-product"
-                    element={<CreateProduct />}
-                  />
-                </Route>
-                <Route
-                  path="/category/:categoryName"
-                  element={<ProductsPage />}
-                ></Route>
-                <Route
-                  path="/category/:categoryName/:subcategoryName"
-                  element={<ProductsSubcatPage />}
-                ></Route>
-                <Route
-                  path="/product/:productId"
-                  element={<ProductDetails />}
-                ></Route>
-                <Route path="/cart" element={<Cart />}></Route>
-                <Route path="/search" element={<Search />}></Route>
-              </Routes>
-            </Suspense>
-          </>
-        )}
+              {/* <Route path="user" element={<Account />} /> */}
+            </Route>
+            <Route path="/account" element={<AdminProtectedRoute />}>
+              <Route
+                path="admin/create-category"
+                element={<CreateCategory />}
+              />
+              <Route path="admin/create-product" element={<CreateProduct />} />
+            </Route>
+            <Route
+              path="/category/:categoryName"
+              element={<ProductsPage />}
+            ></Route>
+            <Route
+              path="/category/:categoryName/:subcategoryName"
+              element={<ProductsSubcatPage />}
+            ></Route>
+            <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/search" element={<Search />}></Route>
+
+            <Route
+              path="/product/:productId"
+              element={
+                <Suspense fallback={<ProductDetailsSkeleton />}>
+                  <ProductDetails />
+                </Suspense>
+              }
+            ></Route>
+          </Routes>
+        </Suspense>
         <Toaster />
       </Wrapper>
     </BrowserRouter>

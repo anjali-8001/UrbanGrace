@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./Contexts/auth";
-import { LoadingProvider } from "./Contexts/loading";
 import { SearchProvider } from "./Contexts/search";
 import { ProductProvider } from "./Contexts/product";
 import { CartProvider } from "./Contexts/cart";
@@ -15,15 +14,13 @@ root.render(
   <React.StrictMode>
     <AuthProvider>
       <ProductProvider>
-        <LoadingProvider>
-          <SearchProvider>
-            <CartProvider>
-              <RecoveryProvider>
-                <App />
-              </RecoveryProvider>
-            </CartProvider>
-          </SearchProvider>
-        </LoadingProvider>
+        <SearchProvider>
+          <CartProvider>
+            <RecoveryProvider>
+              <App />
+            </RecoveryProvider>
+          </CartProvider>
+        </SearchProvider>
       </ProductProvider>
     </AuthProvider>
   </React.StrictMode>

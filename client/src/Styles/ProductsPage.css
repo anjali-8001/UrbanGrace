@@ -15,7 +15,6 @@
   padding: 0px 20px;
   width: 15vw;
   color: black;
-  height: 700px;
   border-radius: 10px;
 }
 
@@ -46,7 +45,6 @@
 .productsContainer {
   /* background-color: rgb(243, 239, 239); */
   gap: 15px;
-  width: 80vw;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }

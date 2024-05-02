@@ -20,6 +20,8 @@
 }
 .productName,
 .productPriceValue {
+  width: 100%;
+  height: auto;
   font-weight: bolder;
   font-size: 1.3rem;
 }

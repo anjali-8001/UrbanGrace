@@ -10,6 +10,7 @@
   background-color: white;
   z-index: 1000;
   border-bottom: 1px black solid;
+  z-index: 5;
 }
 .navLogoContainer {
   flex: 0.1;
@@ -105,40 +106,76 @@
 .loginicon:hover {
   text-decoration: underline;
 }
+.HamburgerIcon {
+  display: none;
+}
 
-@media (max-width: 900px) {
+/* navSidebar CSS */
+
+.navSidebar {
+  z-index: 10;
+  padding: 15px 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  background-color: white;
+}
+.SidebarSearchForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: black 1px solid;
+  border-radius: 20px;
+  padding: 5px;
+  gap: 5px;
+  margin: auto;
+  input {
+    width: 300px;
+    font-size: 1.05rem;
+    border: none;
+  }
+  input:focus {
+    outline: none;
+    border-color: transparent;
+  }
+  button {
+    border: none;
+    background-color: transparent;
+  }
+}
+.navSidebarSearch {
+  width: 80%;
+}
+.navSidebarLinks {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+.HamburgerIconSidebar {
+  align-self: flex-end;
+}
+@media (max-width: 950px) {
   .searchForm {
     border: none;
-    input {
-      display: none;
-    }
+    display: none;
   }
-  .navSignContainer {
-    gap: 10px;
-  }
-}
-@media (max-width: 600px) {
-  .navbar {
-    padding: 10px 20px;
-  }
-  .navLink {
-    font-size: 1rem;
-  }
-  .loginicon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
-  }
-}
-@media (max-width: 400px) {
   .navLinksContainer {
     display: none;
   }
   .navbar {
     justify-content: space-between;
+  }
+  .HamburgerIcon {
+    display: inline;
+  }
+  .navbar {
+    padding: 10px 10px 10px 20px;
   }
 }
