@@ -130,7 +130,7 @@ const CartProvider = ({ children }) => {
     // console.log(state);
   }, [state, auth]);
   return (
-    <CartContext.Provider value={{ ...state, addProductToCart,deleteProductFromCart }}>
+    <CartContext.Provider value={{ ...state, addProductToCart,deleteProductFromCart,getCart }}>
       {children}
     </CartContext.Provider>
   );

@@ -139,7 +139,7 @@ function ProductsPage() {
             <div className="productsContainer">
               {products?.map((product, index) => {
                 return (
-                  <Suspense fallback={<ProductSkeleton />}>
+                  <Suspense key={index} fallback={<ProductSkeleton />}>
                     <Link
                       key={index}
                       className="link"

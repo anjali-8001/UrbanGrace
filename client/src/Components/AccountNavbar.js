@@ -5,10 +5,12 @@ import { useAuth } from "../Contexts/auth";
 import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 import { adminAccountNavbar, userAccountNavbar } from "../Data/data";
+import { useCart } from "../Contexts/cart";
 
 function AccountNavbar({ children }) {
   const [auth, setAuth] = useAuth();
   const location = useLocation();
+  const { getCart } = useCart();
 
   const handleSignOut = () => {
     setAuth({
@@ -17,6 +19,7 @@ function AccountNavbar({ children }) {
       token: "",
     });
     localStorage.removeItem("auth");
+    getCart();
     toast.success("Logged out successfully");
   };
 
