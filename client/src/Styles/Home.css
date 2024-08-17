@@ -1,5 +1,5 @@
 .bannerContainer {
-  background-image: url(../Images/Banner.avif);
+  background-image: url(../Images/Banner.webp);
   height: calc(100vh - 80px);
   width: 100%;
   background-size: cover;

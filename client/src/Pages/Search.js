@@ -48,7 +48,7 @@ function Search() {
         <div className="productsPageContainer">
           <div className="productsNavbar">
             <div className="productsNavbarHeading">Categories</div>
-            <ul className="productsNavbarList">
+            {/* <ul className="productsNavbarList">
               {categories?.map((category, index) => {
                 return (
                   <Link key={index} to={``} className="productsNavbarItem">
@@ -56,7 +56,7 @@ function Search() {
                   </Link>
                 );
               })}
-            </ul>
+            </ul> */}
           </div>
           <div className="productsOuterContainer">
             <div className="productsContainer">

@@ -68,7 +68,7 @@ function ProductDetails() {
             <form className="productDetailsContainer" action="">
               <div className="productName">
                 <p>{product.name}</p>
-                {isLiked ? (
+                {/* {isLiked ? (
                   <FcLike
                     size={30}
                     onClick={() => setIsLiked((prev) => !prev)}
@@ -78,7 +78,7 @@ function ProductDetails() {
                     size={30}
                     onClick={() => setIsLiked((prev) => !prev)}
                   />
-                )}
+                )} */}
               </div>
               <div className="productPrice">
                 <p>MRP inclusive of all taxes</p>

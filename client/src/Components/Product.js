@@ -11,7 +11,7 @@ function Product({ image, name, price, id }) {
     <div className="product">
       <div className="productImg">
         <img src={image} width="300" height="400" loading="lazy" alt="ProductImage" />
-        {isLiked ? (
+        {/* {isLiked ? (
           <FcLike
             className="favButton"
             size={28}
@@ -30,7 +30,7 @@ function Product({ image, name, price, id }) {
               setIsLiked((prev) => !prev);
             }}
           />
-        )}
+        )} */}
       </div>
 
       <div className="productDetails">
