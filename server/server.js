@@ -13,6 +13,9 @@ const app = express();
 app.use(
   cors({
     origin: process.env.ORG_URL,
+    origin: "https://urbangrace.vercel.app",
+    methods: ["POST", "GET"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
